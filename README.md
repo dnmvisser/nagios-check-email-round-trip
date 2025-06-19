@@ -6,12 +6,13 @@ arrive.
 
 * `OK` when the message arrives within 10 minutes in the `INBOX`
 * `WARNING` when the message arives within 10 minutes in the `Spam` folder
-* `CRITICAL` when the message does not arrive with 10 minutes at all
+* `CRITICAL` when the message does not arrive within 10 minutes
 
 # Requirements
 
 * An SMTP relay server to send mail through
 * An IMAP account that will receive the message
+
 
 # Usage
 
@@ -19,7 +20,7 @@ arrive.
 usage: check-email-round-trip.py [-h] --smtp-server SMTP_SERVER [--smtp-port SMTP_PORT]
                                  [--smtp-username SMTP_USERNAME] [--smtp-password SMTP_PASSWORD]
                                  --smtp-from SMTP_FROM --smtp-to SMTP_TO [--subject-prefix SUBJECT_PREFIX]
-                                 [--body BODY] [--smtp-debuglevel SMTP_DEBUGLEVEL] --imap-server IMAP_SERVER
+                                 [--smtp-debuglevel SMTP_DEBUGLEVEL] --imap-server IMAP_SERVER
                                  [--imap-port IMAP_PORT] --imap-username IMAP_USERNAME --imap-password IMAP_PASSWORD
                                  [--imap-inbox-folder IMAP_INBOX_FOLDER] [--imap-spam-folder IMAP_SPAM_FOLDER]
                                  [--imap-poll-interval IMAP_POLL_INTERVAL] [--max-wait MAX_WAIT] [-v]
@@ -41,7 +42,6 @@ options:
   --smtp-to SMTP_TO     TO address to use for sending (default: None)
   --subject-prefix SUBJECT_PREFIX
                         Optional prefix for the message's Subject header. (default: Email monitoring )
-  --body BODY           Body of the message (default: Nagios email round trip test. This message can be ignored)
   --smtp-debuglevel SMTP_DEBUGLEVEL
                         SMTP debug level (default: 0)
   --imap-server IMAP_SERVER

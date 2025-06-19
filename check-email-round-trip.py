@@ -27,11 +27,6 @@ ap.add_argument(
     help="Optional prefix for the message's Subject header.",
     default="Email monitoring ",
 )
-ap.add_argument(
-    "--body",
-    help="Body of the message",
-    default="Nagios email round trip test. This message can be ignored",
-)
 ap.add_argument("--smtp-debuglevel", help="SMTP debug level", default=0)
 ap.add_argument("--imap-server", help="IMAP server address", required=True)
 ap.add_argument("--imap-port", help="IMAP server port", default=993)
@@ -55,7 +50,6 @@ SMTP_PASSWORD = args.smtp_password
 FROM_EMAIL = args.smtp_from
 TO_EMAIL = args.smtp_to
 SUBJECT = args.subject_prefix + str(uuid.uuid4())
-BODY = args.body
 SMTP_DEBUGLEVEL = args.smtp_debuglevel
 
 IMAP_SERVER = args.imap_server
@@ -63,11 +57,16 @@ IMAP_PORT = args.imap_port
 IMAP_USERNAME = args.imap_username
 IMAP_PASSWORD = args.imap_password
 IMAP_FOLDER_INBOX = args.imap_inbox_folder
-#  IMAP_FOLDER_SPAM = '"[Gmail]/Spam"'
 IMAP_FOLDER_SPAM = args.imap_spam_folder
 POLL_INTERVAL = int(args.imap_poll_interval)
-MAX_WAIT_SECONDS = args.max_wait
+MAX_WAIT_SECONDS = int(args.max_wait)
 VERBOSITY = args.verbosity
+
+# TODO find a way to override this with an argument
+BODY = (
+    f"This message is to test the delivery of email to {TO_EMAIL}, from "
+    + f"{FROM_EMAIL}. It can be safely ignored."
+)
 
 
 def send_email():
