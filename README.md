@@ -2,14 +2,16 @@
 
 Nagios plugin to monitor the email round trip status. It will create and send an
 email message to an email address, and check an IMAP mailbox for the message to
-arrive.
+arrive. Possible states:
 
 * `OK` when the message arrives within 10 minutes in the `INBOX`
 * `WARNING` when the message arives within 10 minutes in the `Spam` folder
 * `CRITICAL` when the message does not arrive within 10 minutes
 
+
 # Requirements
 
+* Python 3.6 or newer
 * An SMTP relay server to send mail through
 * An IMAP account that will receive the message
 
